@@ -3,10 +3,10 @@ title: "Lecture 1"
 author: "DJM"
 date: "January 9, 2018"
 output:
-  pdf_document: default
   slidy_presentation:
     css: http://mypage.iu.edu/~dajmcdon/teaching/djmRslidy.css
     font_adjustment: 0
+  pdf_document: default
 ---
 
 # Syllabus
@@ -300,9 +300,9 @@ git to use nano. If for some reason git asks you questions about doing things, j
 * There are Android and iOS apps
 * I use it in my web browser, so I will not always be there.
 
-## HW0
+## In class assignment 1
 
-* Go to https://github.com/STATS-432Sp2018/HW0
+* Go to https://github.com/STATS-432Sp2018/class-roster
 * By noon tomorrow, complete steps 1 and 2
 * Read http://happygitwithr.com/index.html
 * Bring your laptop on Thursday (see me if you need an alternate solution)
