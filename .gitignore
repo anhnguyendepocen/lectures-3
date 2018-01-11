@@ -26,3 +26,4 @@ vignettes/*.pdf
 lectures.Rproj
 /*_files/
 *.Rproj
+.DS_Store
