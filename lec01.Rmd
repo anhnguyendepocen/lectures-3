@@ -3,10 +3,10 @@ title: "Lecture 1"
 author: "DJM"
 date: "January 9, 2018"
 output:
+  pdf_document: default
   slidy_presentation:
     css: http://mypage.iu.edu/~dajmcdon/teaching/djmRslidy.css
     font_adjustment: 0
-  pdf_document: default
 ---
 
 # Syllabus
@@ -20,8 +20,8 @@ Slack: @dajmcdon
 Email: dajmcdon@indiana.edu  
 
 __Office hours__:  
-Me: TBA  
-Michael: TBA
+Me: Tuesday 1-2, Wednesday 2:30-3:30  
+Michael: Friday 10-11 (BH 643)
 
 __Course webpage__:    
 WWW: https://stats-432sp2018.github.com/  
