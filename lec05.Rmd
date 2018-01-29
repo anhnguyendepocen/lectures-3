@@ -3,10 +3,10 @@ title: "Chapter 2"
 author: "DJM"
 date: "30 January 2018"
 output:
+  pdf_document: default
   slidy_presentation:
     css: http://mypage.iu.edu/~dajmcdon/teaching/djmRslidy.css
     font_adjustment: 0
-  pdf_document: default
 ---
 
 \newcommand{\Expect}[1]{\mathbb{E}\left[ #1 \right]}
@@ -106,7 +106,7 @@ A quick overview:
   3. We can (and should) drop one of them. This will not change the bias of our estimator, but it will alter our interpretations.
   4. Collinearity appears most frequently with many categorical variables.
   5. In these cases, software __automatically__ drops one of the levels resulting in the baseline case being in the intercept. Alternately, we could drop the intercept!
-  6. High-dimensional problems (where we have more predictors than data points) also lead to rank deficiencies.
+  6. High-dimensional problems (where we have more predictors than observations) also lead to rank deficiencies.
   6. There are methods (regularizing) which attempt to handle this issue (both the numerics and the interpretability). We may have time to cover them slightly.
   
 ## White noise
@@ -142,8 +142,8 @@ R^2 = 1-\frac{SSE}{\sum_{i=1}^n (Y_i-\overline{Y})^2} = 1-\frac{MSE}{\frac{1}{n}
   
 * This gets spit out by software
 * $X$ and $Y$ are both normal with (empirical) correlation $r$, then $R^2=r^2$
-* In this nice case, it measures how tightly grouped the data is about the regression line
-* Data that is tightly grouped about the regression line can be predicted accurately by the regression line.
+* In this nice case, it measures how tightly grouped the data are about the regression line
+* Data that are tightly grouped about the regression line can be predicted accurately by the regression line.
 * Unfortunately, the implication does not go both ways.
 * High $R^2$ can be achieved in many ways, same with low $R^2$
 * You should just ignore it completely (and the adjusted version), and encourage your friends to do the same
