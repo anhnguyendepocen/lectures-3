@@ -3,10 +3,10 @@ title: "Chapter 4"
 author: "DJM"
 date: "13 February 2017"
 output:
-  pdf_document: default
   slidy_presentation:
     css: http://mypage.iu.edu/~dajmcdon/teaching/djmRslidy.css
     font_adjustment: 0
+  pdf_document: default
 ---
 
 \newcommand{\Expect}[1]{\mathbb{E}\left[ #1 \right]}
@@ -183,7 +183,7 @@ ggplot(df, aes(x, y)) + geom_point() + xlim(0,2*pi) + ylim(0,max(df$y)) +
 
 * Using my formula for $W$, I can calculate different linear smoothers with different $\sigma$
 
-```{r, fig.height = 4, fig.align='center', fig.width=8, echo=FALSE}
+```{r, fig.height = 4, fig.align='center', fig.width=8, echo=TRUE}
 dmat = as.matrix(dist(x))
 Wgauss <- function(sig){
   gg = exp(-dmat^2/(2*sig^2)) / (sig * sqrt(2*pi))
