@@ -3,10 +3,10 @@ title: "Chapter 4"
 author: "DJM"
 date: "13 February 2017"
 output:
+  pdf_document: default
   slidy_presentation:
     css: http://mypage.iu.edu/~dajmcdon/teaching/djmRslidy.css
     font_adjustment: 0
-  pdf_document: default
 ---
 
 \newcommand{\Expect}[1]{\mathbb{E}\left[ #1 \right]}
@@ -407,9 +407,25 @@ MSE(h)-\sigma^2(x) = O(1/n^{4/(4+p)}) \hspace{2em} MSE(\theta_0) -\sigma^2(x) = 
 
 * Split your data to make reasonable inferences.
 
-## Some `npreg` discussion
+## `npreg` computational advice
 
-* `npreg` is using CV and optimization to try to choose the bandwidth for you.
+* Read section 4.6 carefully, it will make your life much easier
+
+* `npreg` works like `lm`: `out = npreg(y~x1+x2)`
+
+* The `+` just means "use these variables"
+
+* There's no reason to use `I(x1^2)` or `x1*x2`, it already does that. (Why?)
+
+* `npreg` takes a little while to run, be sure to set `cache=TRUE` so you need only run it once.
+
+* You can use `ordered(x2)` or `factor(x2)`. This may improve the speed a bit.
+
+* DO NOT CROSS VALIDATE. `npreg` does it automatically. The CV risk estimate is in `out$bws$fval`.
+
+## Some more `npreg` discussion
+
+* `npreg` is using CV and optimization to try to choose the bandwidth(s) for you.
 
 * The `tol` and `ftol` arguments control how close the solution needs to be to an optimum.
 

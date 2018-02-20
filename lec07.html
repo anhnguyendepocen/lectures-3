@@ -373,10 +373,21 @@ MSE(h)-\sigma^2(x) = O(1/n^{4/(4+p)}) \hspace{2em} MSE(\theta_0) -\sigma^2(x) = 
 <li><p>We like CV. It is good.</p></li>
 <li><p>Split your data to make reasonable inferences.</p></li>
 </ul>
-</div><div id="some-npreg-discussion" class="slide section level2">
-<h2>Some <code>npreg</code> discussion</h2>
+</div><div id="npreg-computational-advice" class="slide section level2">
+<h2><code>npreg</code> computational advice</h2>
 <ul>
-<li><p><code>npreg</code> is using CV and optimization to try to choose the bandwidth for you.</p></li>
+<li><p>Read section 4.6 carefully, it will make your life much easier</p></li>
+<li><p><code>npreg</code> works like <code>lm</code>: <code>out = npreg(y~x1+x2)</code></p></li>
+<li><p>The <code>+</code> just means “use these variables”</p></li>
+<li><p>There’s no reason to use <code>I(x1^2)</code> or <code>x1*x2</code>, it already does that. (Why?)</p></li>
+<li><p><code>npreg</code> takes a little while to run, be sure to set <code>cache=TRUE</code> so you need only run it once.</p></li>
+<li><p>You can use <code>ordered(x2)</code> or <code>factor(x2)</code>. This may improve the speed a bit.</p></li>
+<li><p>DO NOT CROSS VALIDATE. <code>npreg</code> does it automatically. The CV risk estimate is in <code>out$bws$fval</code>.</p></li>
+</ul>
+</div><div id="some-more-npreg-discussion" class="slide section level2">
+<h2>Some more <code>npreg</code> discussion</h2>
+<ul>
+<li><p><code>npreg</code> is using CV and optimization to try to choose the bandwidth(s) for you.</p></li>
 <li><p>The <code>tol</code> and <code>ftol</code> arguments control how close the solution needs to be to an optimum.</p></li>
 <li><p>Very basic minimization (called Gradient descent):</p>
 <ul>
