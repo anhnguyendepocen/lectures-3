@@ -106,9 +106,32 @@ DJM
 <li>A request for in-class coding.</li>
 </ul>
 </div>
+<div id="exam-comments" class="slide section level2">
+<h2>Exam comments</h2>
+<p>Excellent - 4<br />
+Very good - 4<br />
+Good - 4<br />
+Ok, but probably see me - 2<br />
+I need to see you yesterday - 2</p>
+<ul>
+<li>What to look for in diagnostic plots:</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>QQ plot - Normality vs skewness vs heavy tails.</li>
+<li>Residuals vs predictors - dependence between <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(x\)</span> (patterns or heteroskedasticity).</li>
+<li>Residuals vs Fitted - patterns are bad</li>
+</ol>
+<ul>
+<li>Residuals always have mean zero (unless you didn’t estimate an intercept)</li>
+<li>Normality is not the same as mean zero</li>
+<li>Bootstrap: if heteroskedasticity or patterns or other evidence that the model is wrong, use non-parametric. If model is true and no heteroskedasticity, parametric is ok.</li>
+<li><code>npreg</code> estimates a function <span class="math inline">\(\widehat{f}(x_1,...,x_p)\)</span>. It’s arbitrary. It will find interactions or handle factors automatically, but there aren’t any coefficients!</li>
+<li>Recall the differentiation we did on the board: this is why that plot at the end is useful.</li>
+<li>To include <code>x1^2</code> in <code>lm</code> (or another model) use <code>I(x1^2)</code>.</li>
+</ul>
+</div>
 <div id="gams" class="slide section level2">
 <h2>GAMs</h2>
-<pre><code>## Warning: package 'knitr' was built under R version 3.4.3</code></pre>
 <ul>
 <li><p>Here we introduce the concept of GAMs ( <strong>G</strong> eneralized <strong>A</strong> dditive <strong>M</strong> odels)</p></li>
 <li><p>The basic idea is to imagine that the response is the sum of some functions of the predictors: <span class="math display">\[

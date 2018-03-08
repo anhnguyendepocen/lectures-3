@@ -3,10 +3,10 @@ title: "Chapter 9 coding"
 author: "DJM"
 date: "8 March 2018"
 output:
+  pdf_document: default
   slidy_presentation:
     css: http://mypage.iu.edu/~dajmcdon/teaching/djmRslidy.css
     font_adjustment: 0
-  pdf_document: default
 ---
 
 
@@ -26,26 +26,6 @@ output:
 hrs = factor(c(2,4,2,2,4,2,4,3,2,3,2,3,2), levels=1:5,labels = c('0-3','3-6','6-10','10-15','15+'))
 knitr::kable(table(hrs))
 ```
-
-
-Comments:
-
-* More math, less coding (3)
-* More coding, less math (6)
-* Text helps (3)
-* Text doesn't help (1)
-* Prefer group HW (5)
-* Detest group HW (3)
-
-Things to do:
-
-* More worked examples (like hedge fund, California)
-* Enforce HW participation, too much HW free-loading.
-* Make you read things __before__ class. (But people don't care much for RRs.)
-* A request for in-class coding.
-
-
-## GAMs
 
 ```{r setup, echo=FALSE, results='hide',message=FALSE}
 # Need the knitr package to set chunk options
@@ -67,6 +47,49 @@ blue = '#0B61A4'
 red = '#FF4900'
 orange = '#FF9200'
 ```
+
+
+
+Comments:
+
+* More math, less coding (3)
+* More coding, less math (6)
+* Text helps (3)
+* Text doesn't help (1)
+* Prefer group HW (5)
+* Detest group HW (3)
+
+Things to do:
+
+* More worked examples (like hedge fund, California)
+* Enforce HW participation, too much HW free-loading.
+* Make you read things __before__ class. (But people don't care much for RRs.)
+* A request for in-class coding.
+
+## Exam comments
+
+Excellent - 4  
+Very good - 4  
+Good - 4  
+Ok, but probably see me - 2  
+I need to see you yesterday - 2
+
+
+* What to look for in diagnostic plots:
+  1. QQ plot - Normality vs skewness vs heavy tails.
+  2. Residuals vs predictors - dependence between $\epsilon$ and $x$ (patterns or heteroskedasticity).
+  3. Residuals vs Fitted - patterns are bad
+* Residuals always have mean zero (unless you didn't estimate an intercept)
+* Normality is not the same as mean zero
+* Bootstrap: if heteroskedasticity or patterns or other evidence that the model is wrong, use non-parametric. If model is true and no heteroskedasticity, parametric is ok.
+* `npreg` estimates a function $\widehat{f}(x_1,...,x_p)$. It's arbitrary. It will find interactions or handle factors automatically, but there aren't any coefficients!
+* Recall the differentiation we did on the board: this is why that plot at the end is useful.
+* To include `x1^2` in `lm` (or another model) use `I(x1^2)`.
+
+
+
+## GAMs
+
 
 * Here we introduce the concept of GAMs ( __G__ eneralized __A__ dditive __M__ odels)
 
