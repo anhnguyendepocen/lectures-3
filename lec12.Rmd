@@ -3,10 +3,10 @@ title: "Chapter 11"
 author: "DJM"
 date: "20 March 2016"
 output:
-  pdf_document: default
   slidy_presentation:
     css: http://mypage.iu.edu/~dajmcdon/teaching/djmRslidy.css
     font_adjustment: 0
+  pdf_document: default
 ---
 
 
@@ -35,6 +35,12 @@ library(knitr)
   # This _will_ leave error messages showing up in the knitted report
 opts_chunk$set(message=FALSE, warning=FALSE, fig.align='center',fig.width=10,
                fig.height=6, cache=TRUE, autodep = TRUE)
+library(ggplot2)
+theme_set(theme_minimal(base_family="Times"))
+green = '#00AF64'
+blue = '#0B61A4'
+red = '#FF4900'
+orange = '#FF9200'
 ```
 
 * Here we finally learn about __logistic regression__.
@@ -328,26 +334,25 @@ signif(mean(ch.clean$start==0),3)
 * We can alter the code from the notes (slightly):
 
 ```{r}
-frequency.vs.probability <- function(p.lower, p.increment=0.01, # changed this
-                                     model, events) {
-    fitted.probs <- fitted(model)
-    indices <- (fitted.probs >= p.lower) & (fitted.probs < p.lower+p.increment) # a change here, too
-    ave.prob <- mean(fitted.probs[indices])
-    frequency <- mean(events[indices])
-    se <- sqrt(ave.prob * (1 - ave.prob)/sum(indices))
-    return(c(frequency = frequency, ave.prob = ave.prob, se = se))
+binary_calibration_plot <- function(y, model, breaks = 0:10/10, 
+                                    point.color='blue', line.color='red') {
+  fitted.probs = predict(model, type="response")
+  ind = cut(fitted.probs, breaks)
+  freq = tapply(y, ind, mean)
+  ave.prob = tapply(fitted.probs, ind, mean)
+  se = sqrt(ave.prob*(1-ave.prob)/table(ind))
+  df = data.frame(freq, ave.prob, se)
+  g <- ggplot(df, aes(ave.prob,freq)) + geom_point(color=point.color) + 
+    geom_abline(slope = 1, intercept = 0,color=line.color) +
+    ylab("observed frequency") + xlab("average predicted probability") +
+    geom_errorbar(ymin=ave.prob-1.96*se, ymax=ave.prob+1.96*se) +
+    ylim(0,1)+xlim(0,1) + 
+    geom_rug(aes(x=fitted.probs,y=fitted.probs),data.frame(fitted.probs),sides='b')
+  return(g)  
 }
-f.vs.p <- sapply(0:6/10,frequency.vs.probability, p.increment=0.1,
-                 model=lr.ch, events=ch.clean$start)
-f.vs.p <- data.frame(frequency=unlist(f.vs.p["frequency",]),
-                     ave.prob=unlist(f.vs.p["ave.prob",]),
-                     se=unlist(f.vs.p["se",]))
-plot(frequency~ave.prob, data=f.vs.p, xlab="Predicted probabilities",
-     ylab="Observed frequencies", xlim=c(0,1), ylim=c(0,1))
-rug(fitted(lr.ch),col="lightgrey")
-abline(0,1,col="blue")
-segments(x0=f.vs.p$ave.prob,y0=f.vs.p$ave.prob-1.96*f.vs.p$se,
-  y1=f.vs.p$ave.prob+1.96*f.vs.p$se)
+
+glr = binary_calibration_plot(ch.clean$start, lr.ch, breaks=0:7/10, blue, red)
+glr
 ```
 
 * Calibration is not great, especially at the high-probability end.
@@ -380,17 +385,8 @@ signif(sum(diag(confusion.gam))/sum(confusion.gam),3)
 ## GAM calibration
 
 ```{r}
-f.vs.p <- sapply(0:8/10,frequency.vs.probability,p.increment=0.1,
-                 model=gam.ch, events=ch.clean$start)
-f.vs.p <- data.frame(frequency=unlist(f.vs.p["frequency",]),
-                     ave.prob=unlist(f.vs.p["ave.prob",]),
-                     se=unlist(f.vs.p["se",]))
-plot(frequency~ave.prob, data=f.vs.p, xlab="Predicted probabilities",
-     ylab="Observed frequencies", xlim=c(0,1), ylim=c(0,1))
-rug(fitted(lr.ch),col="lightgrey")
-abline(0,1,col="blue")
-segments(x0=f.vs.p$ave.prob,y0=f.vs.p$ave.prob-1.96*f.vs.p$se,
-  y1=f.vs.p$ave.prob+1.96*f.vs.p$se)
+ggam = binary_calibration_plot(ch.clean$start, gam.ch, breaks=0:9/10, blue, red)
+ggam
 ```
 
 * This is calibrated a bit better, maybe
