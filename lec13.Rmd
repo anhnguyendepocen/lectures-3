@@ -3,10 +3,10 @@ title: "Chapter 12"
 author: "DJM"
 date: "27 March 2018"
 output:
+  pdf_document: default
   slidy_presentation:
     css: http://mypage.iu.edu/~dajmcdon/teaching/djmRslidy.css
     font_adjustment: 0
-  pdf_document: default
 ---
 
 \newcommand{\Expect}[1]{\mathbb{E}\left[ #1 \right]}
@@ -119,18 +119,26 @@ g(Y) \approx g(\mu(x)) + (Y-\mu(x))g'(\mu(x)) =:Z
 ## Example: OLS
 
 \[
+g(Y) \approx g(\mu(x)) + (Y-\mu(x))g'(\mu(x)) =:Z
+\]
+
+\[
 \begin{aligned}
 \mu(x) &= \Expect{Y\given X=x}\\
 g(m) &= m\\
 g^{-1}(m) &= m\\
 g(\mu(x)) &= \Expect{Y\given X=x}\\
 \Var{Y\given X=x} &= \sigma^2\\
-(g'(x))^2 &= 1
+(g'(m))^2 &= 1
 \end{aligned}
 \]
 
 
 ## Example: logistic regression
+
+\[
+g(Y) \approx g(\mu(x)) + (Y-\mu(x))g'(\mu(x)) =:Z
+\]
 
 \[
 \begin{aligned}
@@ -139,7 +147,7 @@ g(m) &= \log\frac{m}{1-m}\\
 g^{-1}(m) &= \frac{\exp(m)}{1+\exp(m)}\\
 g(\mu(x)) &= \log\frac{P(Y=1\given X=x)}{1-P(Y=1\given X=x)}\\
 \Var{Y\given X=x} &= \mu(x)(1-\mu(x))\\
-(g'(x))^2 &= \left(\frac{d}{dx}\log\frac{x}{1-x}\right)^2 = \left(\frac{1}{x(1-x)}\right)^2
+(g'(m))^2 &= \left(\frac{d}{dm}\log\frac{m}{1-m}\right)^2 = \left(\frac{1}{m(1-m)}\right)^2
 \end{aligned}
 \]
 

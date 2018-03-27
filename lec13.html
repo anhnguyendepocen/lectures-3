@@ -124,18 +124,24 @@ g(Y) \approx g(\mu(x)) + (Y-\mu(x))g'(\mu(x)) =:Z
 <div id="example-ols" class="slide section level2">
 <h2>Example: OLS</h2>
 <p><span class="math display">\[
+g(Y) \approx g(\mu(x)) + (Y-\mu(x))g'(\mu(x)) =:Z
+\]</span></p>
+<p><span class="math display">\[
 \begin{aligned}
 \mu(x) &amp;= {\mathbb{E}\left[ Y{\ \vert\ }X=x \right]}\\
 g(m) &amp;= m\\
 g^{-1}(m) &amp;= m\\
 g(\mu(x)) &amp;= {\mathbb{E}\left[ Y{\ \vert\ }X=x \right]}\\
 {\mathbb{V}\left[ Y{\ \vert\ }X=x \right]} &amp;= \sigma^2\\
-(g'(x))^2 &amp;= 1
+(g'(m))^2 &amp;= 1
 \end{aligned}
 \]</span></p>
 </div>
 <div id="example-logistic-regression" class="slide section level2">
 <h2>Example: logistic regression</h2>
+<p><span class="math display">\[
+g(Y) \approx g(\mu(x)) + (Y-\mu(x))g'(\mu(x)) =:Z
+\]</span></p>
 <p><span class="math display">\[
 \begin{aligned}
 \mu(x) &amp;= {\mathbb{E}\left[ Y {\ \vert\ }X=x \right]}=P(Y=1{\ \vert\ }X=x)\\
@@ -143,7 +149,7 @@ g(m) &amp;= \log\frac{m}{1-m}\\
 g^{-1}(m) &amp;= \frac{\exp(m)}{1+\exp(m)}\\
 g(\mu(x)) &amp;= \log\frac{P(Y=1{\ \vert\ }X=x)}{1-P(Y=1{\ \vert\ }X=x)}\\
 {\mathbb{V}\left[ Y{\ \vert\ }X=x \right]} &amp;= \mu(x)(1-\mu(x))\\
-(g'(x))^2 &amp;= \left(\frac{d}{dx}\log\frac{x}{1-x}\right)^2 = \left(\frac{1}{x(1-x)}\right)^2
+(g'(m))^2 &amp;= \left(\frac{d}{dm}\log\frac{m}{1-m}\right)^2 = \left(\frac{1}{m(1-m)}\right)^2
 \end{aligned}
 \]</span></p>
 </div>
