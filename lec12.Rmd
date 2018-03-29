@@ -596,8 +596,35 @@ cv.mdl <- function(data, formulae, fit.function = lm, family=gaussian, nfolds = 
 }
 ```
 
+
 ```{r}
 (cv.mdl(df, 'y~X1+X2', glm, binomial))
 (cv.mdl(df, 'y~s(X1)+s(X2)', gam, binomial))
 (cv.mdl(df, 'y~s(X1,X2)', gam, binomial))
 ```
+
+
+## Parametric coefficients
+
+```{r}
+summary(gam.ch)
+
+summary(gam.ch)$p.coef
+```
+
+
+
+## Logistic regression residuals
+
+```{r,message=FALSE,warning=FALSE}
+library(tidyverse)
+resid.df = select(ch, c(exports,schooling,growth,peace,concentration,
+                        lnpop,fractionalization))
+resid.df = resid.df[-gam.ch$na.action,]
+resid.df$fitted = fitted(gam.ch)
+resid.df$residuals = residuals(gam.ch, type='pearson')
+resid.df %>% gather(key='key',value='value',-residuals) %>%
+  ggplot(aes(value,residuals)) + geom_point(color=blue) + geom_smooth(color=red) +
+  ylab("Pearson residuals") + facet_wrap(~key,scales='free_x')
+```
+
