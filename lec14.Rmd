@@ -3,10 +3,10 @@ title: "More Classification: ISL 4"
 author: "DJM"
 date: "3 April 2018"
 output:
-  pdf_document: default
   slidy_presentation:
     css: http://mypage.iu.edu/~dajmcdon/teaching/djmRslidy.css
     font_adjustment: 0
+  pdf_document: default
 ---
 
 \newcommand{\Expect}[1]{\mathbb{E}\left[ #1 \right]}
@@ -356,6 +356,28 @@ ggplot(df, aes(X1,X2,color=y)) + geom_point() + scale_color_brewer(palette = 'Se
 
 * LDA only really depends on $\Sigma^{-1}(\mu_1-\mu_0)$ and $(\mu_1+\mu_0)$, so it has $<2p$ parameters.
 
+```{r qda-pred}
+n1=50; n0=50
+Sigma1 = matrix(c(2,.8,.8,1),2)
+Sigma0 = matrix(c(1,-.5,-.5,2),2)
+X1 = rmvnorm(n1, mu1, Sigma1) 
+X2 = rmvnorm(n0, mu0, Sigma0)
+X = rbind(X1,X2)
+y = factor(c(rep(1,n1),rep(0,n0)))
+df = data.frame(y,X)
+qda.fit = qda(y~X1+X2, data=df)
+lda.fit = lda(y~X1+X2, data=df)
+pred.grid = expand.grid(X1=seq(min(df$X1),max(df$X1),len=100),
+                        X2=seq(min(df$X2),max(df$X2),len=100))
+pred.grid$qda = predict(qda.fit, newdata=pred.grid)$class
+pred.grid$lda = predict(lda.fit, newdata=pred.grid)$class
+pg = gather(pred.grid,key='key',value='predictions',-c(X1,X2))
+ggplot(pg, aes(X1,X2)) + geom_raster(aes(fill=predictions)) +
+  facet_wrap(~key) + scale_fill_brewer()+
+  geom_point(data=df,mapping=aes(X1,X2,color=y)) +
+  scale_color_brewer(palette = 'Set1')
+```
+
 # KNN
 
 ## Re-entry 
@@ -436,7 +458,7 @@ X = runif(50,-1,1)
 ell <- function(x) abs(x)<.5
 y = ell(X)
 dat = data.frame(y,X)
-g1 <- ggplot(data.frame(X=X,y=y,vert=0),aes(X,y=vert,color=y)) + geom_point() +
+g1 <- ggplot(data.frame(X=X1,y=y,vert=0),aes(X,y=vert,color=y)) + geom_point() +
   scale_color_brewer(palette = 'Set1') + geom_vline(xintercept = c(-.5,.5))
 Z = mutate(dat, Z1=X^2, Z2=X)
 g2 <- ggplot(Z,aes(Z1,Z2,color=y)) + geom_point() +
