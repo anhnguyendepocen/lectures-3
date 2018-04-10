@@ -3,10 +3,10 @@ title: "Chapter 6 in ISL: Regularization"
 author: "DJM"
 date: "17 April 2018"
 output:
+  pdf_document: default
   slidy_presentation:
     css: http://mypage.iu.edu/~dajmcdon/teaching/djmRslidy.css
     font_adjustment: 0
-  pdf_document: default
 ---
 
 \newcommand{\Expect}[1]{\mathbb{E}\left[ #1 \right]}
@@ -19,7 +19,6 @@ output:
 \newcommand{\tr}[1]{\mbox{tr}(#1)}
 \newcommand{\brt}{\widehat{\beta}_{r,t}}
 \newcommand{\brl}{\widehat{\beta}_{r,\lambda}}
-\newcommand{\bls}{\widehat{\beta}_{ls}}
 \newcommand{\bls}{\widehat{\beta}_{ls}}
 \newcommand{\blt}{\widehat{\beta}_{l,t}}
 \newcommand{\bll}{\widehat{\beta}_{l,\lambda}}
